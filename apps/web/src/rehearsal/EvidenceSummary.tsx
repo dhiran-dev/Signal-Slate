@@ -1,0 +1,10 @@
+import type {Session} from './types'
+import {receiverSummary} from './evidence'
+export function EvidenceSummary({session,title}:{session:Session;title?:string}) {
+ return <section className="sl-panel"><p className="sl-eyebrow">REHEARSAL COMPARISON</p><h2>{title||'What changed in the receivers?'}</h2><p className="sl-muted">Measured from returned 100ms samples. A partial sample set does not establish complete coverage.</p>
+ <div className="sl-table-wrap" tabIndex={0} role="region" aria-label="Receiver comparison table"><table className="sl-evidence-table"><thead><tr><th>Receiver</th><th>Min quality<br/>before → after</th><th>Dropout<br/>before → after</th><th>Clipping<br/>before → after</th><th>Dropout change</th></tr></thead><tbody>{session.shot_context.mic_ids.map(id=>{const before=receiverSummary(session.baseline,id),after=receiverSummary(session.comparison,id);return <tr key={id}><th>{session.shot_context.performer_names[id]||id}</th><td>{before.minQuality?.toFixed(0)??'—'} → {after.minQuality?.toFixed(0)??'—'}</td><td>{before.dropoutMs} → {after.dropoutMs} ms</td><td>{before.clippingMs} → {after.clippingMs} ms</td><td>{after.dropoutMs-before.dropoutMs>0?'+':''}{after.dropoutMs-before.dropoutMs} ms</td></tr>})}</tbody></table></div>
+ <p className="sl-muted">Negative change means fewer simulated dropout milliseconds. The verifier independently determines whether all checks pass.</p>
+ <div className="sl-proof-grid">{[session.baseline,session.comparison].map((run,i)=>run&&<details key={run.run_id}><summary>{i===0?'Baseline':'Comparison'} · {run.run_id.slice(0,14)}…</summary><dl className="sl-mono"><dt>Run identifier</dt><dd>{run.run_id}</dd><dt>Configuration SHA-256</dt><dd>{run.config_hash}</dd><dt>Returned evidence</dt><dd>{run.samples.length} samples / {run.metrics.length} metric summaries</dd></dl></details>)}</div>
+ {session.confirmed_constraints.length>0&&<><h3>Confirmed creative constraints</h3>{session.confirmed_constraints.map(c=><p key={c.constraint_id}>“{c.exact_source_span}”</p>)}</>}
+ </section>
+}

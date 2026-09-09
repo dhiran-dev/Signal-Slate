@@ -1,0 +1,44 @@
+{
+  "dialogue": "Perimeter sensors detected breached access at section nine; whatever happens, do not cut the feed until our squad secures point alpha.",
+  "timing_precision": "approximate",
+  "disclosure": "Timings represent approximate phrase intervals derived from audio energy envelopes for later verified rehearsal alignment; no exact word timestamps are asserted.",
+  "phrases": [
+    {
+      "index": 1,
+      "text": "Perimeter sensors detected breached access at section nine;",
+      "approx_start_seconds": 0.50,
+      "approx_end_seconds": 3.80,
+      "approx_start_ms": 500,
+      "approx_end_ms": 3800,
+      "is_critical": false
+    },
+    {
+      "index": 2,
+      "text": "whatever happens,",
+      "approx_start_seconds": 3.80,
+      "approx_end_seconds": 4.90,
+      "approx_start_ms": 3800,
+      "approx_end_ms": 4900,
+      "is_critical": false
+    },
+    {
+      "index": 3,
+      "text": "do not cut the feed",
+      "approx_start_seconds": 4.90,
+      "approx_end_seconds": 6.80,
+      "approx_start_ms": 4900,
+      "approx_end_ms": 6800,
+      "critical_word": "cut",
+      "is_critical": true
+    },
+    {
+      "index": 4,
+      "text": "until our squad secures point alpha.",
+      "approx_start_seconds": 6.80,
+      "approx_end_seconds": 9.60,
+      "approx_start_ms": 6800,
+      "approx_end_ms": 9600,
+      "is_critical": false
+    }
+  ]
+}

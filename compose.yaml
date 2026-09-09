@@ -1,0 +1,17 @@
+# Optional local Docker runner. PostgreSQL is supplied separately through DATABASE_URL.
+# Hosted deployments can build the root Dockerfile and inject runtime variables directly.
+services:
+  app:
+    build: .
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set the existing remote PostgreSQL URL}
+      SIGNAL_SLATE_ALLOWED_ORIGINS: ${SIGNAL_SLATE_ALLOWED_ORIGINS:-http://localhost:8080,http://127.0.0.1:8080}
+      SIGNAL_SLATE_SECURE_COOKIES: ${SIGNAL_SLATE_SECURE_COOKIES:-false}
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:8000"
+    init: true
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true

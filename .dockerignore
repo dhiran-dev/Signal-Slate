@@ -1,0 +1,70 @@
+# Version control
+.git
+.gitignore
+
+# Operating System
+.DS_Store
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / JS
+node_modules/
+dist/
+
+# Secrets and environment files
+.env*
+!.env.example
+*.pem
+*.key
+application_default_credentials.json
+*credentials*.json
+*service_account*.json
+
+# Agent instructions, private plans, reviews, handoffs
+**/*.[mM][dD]
+**/*.[mM][aA][rR][kK][dD][oO][wW][nN]
+!README.md
+.codex/
+.gstack/
+.gemini/
+GEMINI.md
+AGENTS.md
+MAIN-IMPLEMENTATION-PLAN.md
+CREDENTIALS-AND-SETUP.md
+AGENT-INSTRUCTIONS.md
+*-handoff.md
+*-review.md
+*IMPLEMENTATION-PLAN*
+private/
+plans/
+reviews/
+implementation-handoff/
+
+# Local data & recordings
+/data/
+/recordings/
+/local_data/
+
+# Browser artifacts, local diagnostic output and build metadata
+playwright-report/
+test-results/
+*.log
+*.tsbuildinfo
+IMPLEMENTATION-PROVENANCE.md
+# The container needs application source and assets only.
+tests/
+.github/
+scripts/
+contracts/
+assets/screenshots/
+**/*.test.ts
+**/*.test.tsx

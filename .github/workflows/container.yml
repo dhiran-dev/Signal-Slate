@@ -1,0 +1,71 @@
+name: Container
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      # Disposable test fixture. Deployment uses an existing external database.
+      postgres:
+        image: postgres:17-bookworm
+        env:
+          POSTGRES_USER: signal_slate
+          POSTGRES_PASSWORD: ci-only-password
+          POSTGRES_DB: signal_slate
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U signal_slate -d signal_slate"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check published documentation
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import subprocess
+          paths = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          markdown = {path for path in paths if pathlib.Path(path).suffix.lower() in {".md", ".markdown"}}
+          assert markdown == {"README.md"}, "Only the application README may be published"
+          PY
+      - name: Build production image
+        run: docker build --tag signal-slate:test .
+      - name: Start application against the separate database
+        run: |
+          docker run --detach --name signal-slate-test --network host \
+            --env DATABASE_URL=postgresql://signal_slate:ci-only-password@127.0.0.1:5432/signal_slate \
+            --env SIGNAL_SLATE_ALLOWED_ORIGINS=https://sound.example.com \
+            signal-slate:test
+          for attempt in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:8000/ready; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+      - name: Check pages, audio, cookies and the complete preview
+        run: python3 scripts/smoke-container.py
+      - name: Check bundled Grafana client without provider access
+        run: docker exec --env UV_OFFLINE=true signal-slate-test uvx mcp-grafana==1.3.0 --help
+      - name: Check session survives application restart
+        run: |
+          docker restart signal-slate-test
+          for attempt in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:8000/ready; then
+              python3 scripts/smoke-container.py --restore-only
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+      - name: Application logs
+        if: failure()
+        run: docker logs signal-slate-test

@@ -1,0 +1,18 @@
+import type {components} from '../api.generated'
+export type Action=components['schemas']['CandidateAction']
+export type Plan=Required<components['schemas']['CandidatePlan']>
+export type Approval=components['schemas']['PlanApproval']
+export type Constraint=components['schemas']['Constraint']
+export type RunConfig=Required<components['schemas']['RunConfig']>
+export interface Readiness {live_available: boolean; runtime_enabled: boolean; gemini: {configured: boolean}; grafana: {configured: boolean}; missing: string[]}
+export interface Run { run_id: string; config_hash: string; samples: {offset_ms: number; mic_id: string; quality: number; is_dropout: boolean; is_clipped: boolean}[]; metrics: unknown[]; completion_marker_present: boolean }
+export interface Evidence {evidence_id:string;run_id:string;mic_id:string;offset_ms:number;source_tool:string;query_hash:string;observation_type:string;value:unknown;unit:string;retrieval_time:string;config_hash:string}
+export interface Session { preset?: 'a'|'b'|'c'|'control'; finding_origin?:'gemini'|'deterministic'|'preview'; finding_evidence?:Evidence[];original_baseline?:Run|null;history?:{baseline:Run;comparison:Run;config:RunConfig;verification:Session['verification'];approval:unknown}[]; baseline_config?:RunConfig;comparison_config?:RunConfig|null;operation?:{id:string;kind:string;status:string;lease_expires_at:string;resumable:boolean}; id: string; csrf_token: string; revision: number; busy?: boolean; state: string; mode: 'live' | 'preview'; shot_context: {duration_ms: number; mic_ids: string[]; performer_names: Record<string,string>; transcript: string; critical_dialogue_text: string; critical_line_start_ms: number; critical_line_end_ms: number}; baseline: Run | null; comparison: Run | null; finding: {status: string; observations: string[]; evidence_ids: string[]; competing_explanations: string[]; recommended_action: Action} | null; interpretation: {status: string; rationale: string; constraints: Constraint[]} | null; candidate_plans: Plan[]; confirmed_constraints: Constraint[]; approval: Approval | null; verification: {terminal_status: string; completeness_passed: boolean; crosscheck_passed: boolean; thresholds_passed: boolean; dialogue_coverage_passed: boolean; constraints_passed: boolean; failure_reasons: string[]; evidence_hashes: Record<string,string>} | null; error: string | null }
+export async function requestSession(path: string, body?: unknown, csrf?: string): Promise<Session> {
+  const response = await fetch(`/api/sessions${path}`, {method: body === undefined ? 'GET' : 'POST', credentials: 'same-origin', headers: {'Content-Type':'application/json', ...(csrf ? {'X-CSRF-Token':csrf} : {}),...(body !== undefined ? {'Idempotency-Key':crypto.randomUUID()} : {})}, ...(body === undefined ? {} : {body: JSON.stringify(body)}), signal: AbortSignal.timeout(180000)})
+  const data = await response.json().catch(() => null)
+  if (!response.ok) throw new Error(typeof data?.detail === 'string' ? data.detail : `Request failed (${response.status}). Refresh the session before retrying.`)
+  return data as Session
+}
+
+export async function resumeSession(session:Session):Promise<Session>{const response=await fetch(`/api/operations/${session.operation!.id}/resume`,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrf_token},body:JSON.stringify({revision:session.revision})});const data=await response.json();if(!response.ok)throw new Error(typeof data.detail==='string'?data.detail:'Recovery could not complete. Refresh the session.');return data as Session}

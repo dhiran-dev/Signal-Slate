@@ -1,0 +1,73 @@
+{
+  "asset_name": "critical_line_12s.wav",
+  "asset_type": "synthetic_dialogue_audio",
+  "authorship_and_licensing": {
+    "authorship": "Explicitly synthetic speech generated via Google Cloud Vertex AI Text-to-Speech API. Not a human recording, actor recording, or project owner voice.",
+    "claim_of_human_authorship": false,
+    "claim_of_exclusive_copyright": false,
+    "provider_terms": "Generated asset subject to Google Cloud Platform Service Terms and Vertex AI terms of service.",
+    "character_voice_nature": "Original fictional dialogue line; no imitation or likeness of any real or known person."
+  },
+  "generation_metadata": {
+    "provider": "Google Cloud Vertex AI",
+    "service": "Cloud Text-to-Speech / Vertex AI Generative Speech",
+    "model_id": "gemini-2.5-flash-tts",
+    "voice_name": "kore",
+    "voice_type": "Google prebuilt neural voice",
+    "language": "en-US",
+    "raw_audio_format": "audio/L16;codec=pcm;rate=24000",
+    "raw_audio_duration_seconds": 9.131,
+    "raw_audio_samples": 219143,
+    "raw_audio_sha256": "30e442eb8b26aeb58bcf60f85524bb81284a44914f31c23741f660c23b01ed81"
+  },
+  "audio_specifications": {
+    "container": "WAV",
+    "encoding": "PCM signed 16-bit little-endian (LINEAR16)",
+    "channels": 1,
+    "channel_layout": "mono",
+    "sample_rate_hz": 24000,
+    "sample_width_bytes": 2,
+    "total_samples": 288000,
+    "exact_duration_seconds": 12.0,
+    "file_size_bytes": 576044,
+    "final_wav_sha256": "d7afbe4395aad34313673f18fae92c90be7fd34e33d072fe882cf3ed24c50c03"
+  },
+  "processing": {
+    "lead_in_silence_seconds": 0.5,
+    "speech_interval_seconds": [0.5, 9.631],
+    "trailing_silence_seconds": 2.369,
+    "speed_distortion_applied": false,
+    "method": "Exact sample padding with digital zero silence frames (no time-stretching or pitch alterations)"
+  },
+  "dialogue": {
+    "transcript": "Perimeter sensors detected breached access at section nine; whatever happens, do not cut the feed until our squad secures point alpha.",
+    "word_count": 21,
+    "critical_word": "cut",
+    "critical_word_position": 13,
+    "timing_alignment": "approximate",
+    "timing_disclosure": "Phrase timings are approximate intervals based on audio energy profile for rehearsal alignment, not forced word-level alignments.",
+    "approximate_phrase_timings": [
+      {
+        "phrase": "Perimeter sensors detected breached access at section nine;",
+        "approx_start_seconds": 0.5,
+        "approx_end_seconds": 3.8
+      },
+      {
+        "phrase": "whatever happens,",
+        "approx_start_seconds": 3.8,
+        "approx_end_seconds": 4.9
+      },
+      {
+        "phrase": "do not cut the feed",
+        "approx_start_seconds": 4.9,
+        "approx_end_seconds": 6.8,
+        "note": "Contains critical word 'cut' targeted by simulated RF transmission dropout"
+      },
+      {
+        "phrase": "until our squad secures point alpha.",
+        "approx_start_seconds": 6.8,
+        "approx_end_seconds": 9.63
+      }
+    ]
+  }
+}

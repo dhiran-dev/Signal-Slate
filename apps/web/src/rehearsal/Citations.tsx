@@ -1,0 +1,4 @@
+import type {Session} from './types'
+export function Citations({session}:{session:Session}) {
+ return <section aria-label="Finding evidence citations"><h3>Evidence citations</h3>{session.finding?.evidence_ids.map(id=>{const entries=session.finding_evidence?.filter(e=>e.evidence_id===id)??[];return <details key={id}><summary className="sl-mono">{id}</summary>{entries.length?entries.map((e,i)=><dl className="sl-mono" key={`${e.run_id}-${i}`}><dt>Bound run</dt><dd>{e.run_id}</dd><dt>Receiver and time</dt><dd>{e.mic_id} · {e.offset_ms} ms</dd><dt>Retrieved observation</dt><dd>{e.observation_type}: {typeof e.value==='object'?JSON.stringify(e.value):String(e.value)} {e.unit}</dd><dt>Source tool</dt><dd>{e.source_tool}</dd><dt>Configuration hash</dt><dd>{e.config_hash}</dd><dt>Query hash</dt><dd>{e.query_hash}</dd></dl>):<p>This citation’s original envelope is unavailable. No comparison evidence is substituted.</p>}</details>})}</section>
+}

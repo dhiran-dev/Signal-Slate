@@ -1,0 +1,21 @@
+{
+  "name": "signal-slate-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "lint": "npm --prefix apps/web run lint",
+    "test": "npm --prefix apps/web run test -- --run",
+    "typecheck": "npm --prefix apps/web run typecheck",
+    "build": "npm --prefix apps/web run build",
+    "contracts:generate": "openapi-typescript contracts/openapi.json -o apps/web/src/api.generated.ts",
+    "contracts:check": "node scripts/check-contracts.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
+    "@playwright/test": "1.58.2",
+    "openapi-typescript": "7.13.0"
+  }
+}
