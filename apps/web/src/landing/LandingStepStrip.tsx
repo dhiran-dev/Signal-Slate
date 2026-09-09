@@ -25,7 +25,7 @@ export const LandingStepStrip: React.FC = () => {
               </div>
             </div>
             <p className="landing-step-label">Choose a scene</p>
-            <p className="landing-step-desc">Run the sample rehearsal</p>
+            <p className="landing-step-desc">Click Check sound to find gaps in the sample dialogue.</p>
           </div>
 
           {/* Step 2: Check the sound */}
@@ -71,7 +71,7 @@ export const LandingStepStrip: React.FC = () => {
               </div>
             </div>
             <p className="landing-step-label">Check the sound</p>
-            <p className="landing-step-desc">Gemini suggests a change; you approve it</p>
+            <p className="landing-step-desc">Gemini reviews microphone readings. You confirm your rules and approve a change.</p>
           </div>
 
           {/* Step 3: Review the result */}
@@ -99,12 +99,12 @@ export const LandingStepStrip: React.FC = () => {
               </div>
             </div>
             <p className="landing-step-label">Review the result</p>
-            <p className="landing-step-desc">A fresh check uses Grafana readings to see whether it worked</p>
+            <p className="landing-step-desc">Run another check. The app compares fresh readings stored in Grafana.</p>
           </div>
         </div>
 
         <p className="landing-strip-footer-note">
-          Suggestions by Gemini · Readings checked with Grafana
+          In a live check, Gemini reviews the readings and Grafana stores the evidence. Audio and microphone readings are simulated.
         </p>
       </div>
     </section>

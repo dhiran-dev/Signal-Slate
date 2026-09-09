@@ -193,7 +193,7 @@ export const ReviewChangeStep: React.FC<ReviewChangeStepProps> = ({
       <div className="step-heading-group">
         <h1 className="step-main-title">Review change</h1>
         <p className="step-subtitle">
-          Review the channel change. Add any channels to keep free, then test it.
+          Review the suggested setting. Confirm any channels to keep free, then click Test this change.
         </p>
         <p className="step-meta-line">
           Alleyway dialogue · 12 seconds · 4 microphones &nbsp;&nbsp; Sample scene · Simulated
@@ -401,7 +401,7 @@ export const ReviewChangeStep: React.FC<ReviewChangeStepProps> = ({
           )}
 
           <p className="channels-rule-helper mt-2">
-            A channel is the microphone's wireless setting.
+            A channel is the microphone's wireless setting. Enter a channel to keep free, click Interpret rule, then Confirm rule before testing.
           </p>
         </div>
 
@@ -443,7 +443,7 @@ export const ReviewChangeStep: React.FC<ReviewChangeStepProps> = ({
             onClick={() => selectedPlan && onTestChange(selectedPlan)}
             disabled={!canTest}
           >
-            <span>{busy ? 'Testing change…' : 'Test this change'}</span>
+            <span>{busy ? 'Please wait…' : 'Test this change'}</span>
             <ArrowRightIcon size={18} />
           </button>
           <span className="bottom-card-disclaimer">

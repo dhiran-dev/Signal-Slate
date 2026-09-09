@@ -226,7 +226,7 @@ describe('Rehearsal API workflow', () => {
   it('selects live mode explicitly and shows usage disclosure before dispatch', async () => {
     render(<Rehearsal />)
     expect(
-      screen.getByText(/Live mode uses configured Google and Grafana accounts and can incur API usage charges/i)
+      screen.getByText(/A live check makes at most five Gemini requests. Google API usage charges may apply./i)
     ).toBeInTheDocument()
 
     fireEvent.click(screen.getByLabelText(/Live cloud check/i))

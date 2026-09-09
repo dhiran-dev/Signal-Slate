@@ -338,7 +338,11 @@ export const SoundIssuesStep: React.FC<SoundIssuesStepProps> = ({
             <h2 className="sidebar-title">
               {isLive ? 'Readings from Grafana' : 'Preview readings'}
             </h2>
-            <p className="sidebar-text">Supporting microphone readings for this section.</p>
+            <p className="sidebar-text">
+              {isLive
+                ? 'Grafana stores the microphone measurements and event records. Open the readings to see the evidence behind this issue.'
+                : 'These built-in sample readings illustrate the sound issue without calling cloud services.'}
+            </p>
             {evidenceUrl ? (
               <a
                 href={evidenceUrl}
@@ -362,7 +366,9 @@ export const SoundIssuesStep: React.FC<SoundIssuesStepProps> = ({
             <p className="sidebar-text">
               {issueCount === 0
                 ? 'No sound issues found. You can proceed to check the report.'
-                : 'The next step suggests a change for you to review.'}
+                : isLive
+                ? 'Click Find a fix. Gemini will review these readings and suggest a setting change for you to approve.'
+                : 'Click Find a fix to review the sample suggestion.'}
             </p>
           </div>
         </aside>

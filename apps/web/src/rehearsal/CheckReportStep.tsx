@@ -82,8 +82,8 @@ export const CheckReportStep: React.FC<CheckReportStepProps> = ({
       key: 'crosscheck',
       title: crosscheckPassed ? 'Two sources agree' : 'Sources unverified',
       desc: crosscheckPassed
-        ? 'Logs and metrics'
-        : 'Independent metrics did not verify across logs.',
+        ? 'Event records match the per-second measurements.'
+        : 'Event records and measurements could not be confirmed to agree.',
       passed: crosscheckPassed,
       hasDetails: true
     },
@@ -99,7 +99,7 @@ export const CheckReportStep: React.FC<CheckReportStepProps> = ({
       key: 'coverage',
       title: coveragePassed ? 'Dialogue covered' : 'Dialogue gap detected',
       desc: coveragePassed
-        ? 'Dialogue detected across the scene.'
+        ? 'No simulated sound gaps overlap the scripted dialogue.'
         : 'Critical dialogue line was interrupted or lost.',
       passed: coveragePassed
     }
@@ -401,7 +401,12 @@ export const CheckReportStep: React.FC<CheckReportStepProps> = ({
           <div className="sidebar-section">
             <h2 className="sidebar-title">About this report</h2>
             <p className="sidebar-text">
-              Includes the sample check results and links to the readings.
+              {isPreview
+                ? 'This preview uses built-in sample results. Gemini and Grafana were not called.'
+                : 'Gemini suggests setting changes. Grafana stores the evidence. This report shows which checks the readings passed.'}
+            </p>
+            <p className="sidebar-text mt-2">
+              Open the readings to inspect the evidence, or download this report to keep the result.
             </p>
 
             {/* Pipeline Flow Graphic */}

@@ -204,10 +204,10 @@ export const SceneSetupStep: React.FC<SceneSetupStepProps> = ({
           <div className="sidebar-section">
             <h2 className="sidebar-title">About this sample</h2>
             <p className="sidebar-text">
-              You are the sound operator before a film take. Run this 12-second demo, review any missing dialogue, then approve and test a suggested change.
+              You are checking sound before filming. Click Check sound, review any missing dialogue, then use Find a fix to review a suggested change.
             </p>
             <p className="sidebar-footnote mt-2">
-              This rehearsal uses simulated microphone audio, not live microphone input.
+              This 12-second demo uses sample dialogue and simulated microphones. No recording equipment is needed.
             </p>
           </div>
 
@@ -215,6 +215,11 @@ export const SceneSetupStep: React.FC<SceneSetupStepProps> = ({
 
           <div className="sidebar-section">
             <h2 className="sidebar-title">Connection status</h2>
+            <p className="sidebar-text mb-3">
+              {mode === 'live'
+                ? 'Gemini reads the microphone measurements and suggests a change. Grafana stores the readings that the app uses to check the result.'
+                : 'Preview uses built-in sample results. It does not call Gemini or Grafana.'}
+            </p>
             <ul className="connection-status-list">
               <li className="connection-status-item flex items-center gap-3">
                 <CheckCircleIcon size={32} filled={!isCheckingReadiness && geminiConfigured} />
@@ -257,8 +262,7 @@ export const SceneSetupStep: React.FC<SceneSetupStepProps> = ({
 
             {/* Live Usage Disclosure visible outside collapsed details */}
             <p className="usage-disclosure-text">
-              Live mode uses configured Google and Grafana accounts and can incur API usage
-              charges. Each rehearsal permits at most five model dispatches.
+              A live check makes at most five Gemini requests. Google API usage charges may apply.
             </p>
 
             {/* Collapsible Connection Help & Options */}
@@ -311,7 +315,7 @@ export const SceneSetupStep: React.FC<SceneSetupStepProps> = ({
           <div className="card-divider" />
 
           <p className="sidebar-footnote">
-            Your check uses sample audio and simulated readings.
+            Sound gaps come from simulated readings. This demo does not analyse uploaded audio.
           </p>
         </aside>
       </div>

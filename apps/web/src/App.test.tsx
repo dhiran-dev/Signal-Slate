@@ -38,7 +38,7 @@ describe('Signal Slate Landing Page & Application Routing', () => {
       // Approved subhead
       expect(
         screen.getByText(
-          'A sound-check assistant for film crews. Find lost dialogue, approve a microphone-setting change, and test whether it helps.'
+          'For film sound teams: catch a microphone cutting out during an important line. Review a suggested setting change, then check whether the next rehearsal improves.'
         )
       ).toBeInTheDocument()
     })

@@ -531,6 +531,11 @@ export const CompareTakesStep: React.FC<CompareTakesStepProps> = ({
                 ? 'New readings checked with Grafana'
                 : 'Preview readings checked'}
             </h2>
+            <p className="sidebar-text">
+              {session?.mode === 'live'
+                ? 'After your approval, the app runs a new simulated rehearsal and checks its readings in Grafana to see whether the change helped.'
+                : 'This comparison uses built-in sample readings. Gemini and Grafana were not called.'}
+            </p>
             {session?.mode === 'live' && verification?.crosscheck_passed && (
               <p className="text-xs text-green-800 font-medium mb-1.5">
                 Grafana logs and metrics agree
