@@ -121,7 +121,7 @@ export const WaveformTrack: React.FC<WaveformTrackProps> = ({
       {/* Waveform track body */}
       <div
         className={`waveform-track-body ${interactive ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#b84729]' : ''}`}
-        style={{ height }}
+        style={{ height: `var(--workspace-waveform-height, ${height}px)` }}
         onClick={handleClick}
         role={interactive ? 'slider' : 'img'}
         aria-label={ariaLabel}

@@ -1859,6 +1859,151 @@
   }
 }
 
+/* Desktop workspace: keep the next action visible; let expanded evidence scroll. */
+@media screen and (min-width: 1100px) {
+  .rehearsal-app-root {
+    height: 100dvh;
+    min-height: 680px;
+    --workspace-waveform-height: 36px;
+  }
+  .rehearsal-header {
+    height: 54px;
+    flex-shrink: 0;
+    padding: 0 28px;
+  }
+  .rehearsal-brand { font-size: 23px; width: 228px; gap: 8px; }
+  .rehearsal-nav-tab { font-size: 14px; }
+  .rehearsal-nav-tab.active::after { bottom: -10px; }
+  .rehearsal-scene-badge { font-size: 13px; }
+  .rehearsal-stepper-nav { padding: 6px 28px; flex-shrink: 0; }
+  .stepper-step-button { gap: 8px; padding: 2px 6px; }
+  .stepper-circle { width: 32px; height: 32px; font-size: 14px; }
+  .stepper-label { font-size: 15px; }
+  .is-blue-accent::after { bottom: -7px; }
+  .rehearsal-banner { margin-top: 8px; padding: 8px 16px; font-size: 13px; flex-shrink: 0; }
+  .rehearsal-main-stage { flex: 1; min-height: 0; padding: 12px 28px 14px; }
+  .rehearsal-main-stage > div {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .rehearsal-main-stage > div > * { flex-shrink: 0; }
+  .step-heading-group { margin-bottom: 12px; gap: 4px 12px; }
+  .step-main-title { font-size: 27px; margin-bottom: 3px; line-height: 1.2; }
+  .step-subtitle { font-size: 15px; line-height: 1.4; }
+  .step-meta-line { font-size: 12px; margin-top: 4px; }
+  .rehearsal-main-stage .step-two-columns {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 14px;
+  }
+  .step-two-columns > *,
+  .rehearsal-main-stage > div > .step-main-card {
+    min-height: 0;
+    min-width: 0;
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+  .rehearsal-main-stage > div > .step-main-card { flex: 1; }
+  .step-main-card, .step-sidebar-card { padding: 14px 18px; }
+  .card-divider { margin: 12px 0; }
+  .card-section-title { font-size: 16px; margin-bottom: 8px; }
+  .sidebar-title { font-size: 16px; margin-bottom: 6px; }
+  .sidebar-text { font-size: 14px; line-height: 1.45; }
+  .sidebar-footnote { font-size: 12px; line-height: 1.4; }
+  .connection-status-list { gap: 6px; margin-bottom: 8px; }
+  .connection-status-item svg { width: 22px; height: 22px; }
+  .step-bottom-action-bar, .step-bottom-action-card {
+    margin-top: 12px;
+    padding: 10px 16px;
+    gap: 8px 16px;
+  }
+  .bottom-action-left { gap: 12px; }
+  .bottom-action-right { display: flex; align-items: center; gap: 12px; }
+  .bottom-action-hint, .bottom-card-subtext { font-size: 13px; }
+  .bottom-action-sample-tag, .bottom-card-disclaimer { font-size: 11px; }
+  .bottom-card-title { font-size: 15px; margin-bottom: 2px; }
+  .bottom-card-left { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 20px; }
+  .bottom-card-left .btn-back-link { grid-column: 2; grid-row: 1 / 3; margin: 0; padding: 3px 0; }
+  .btn-setup-cta, .btn-step-cta, .btn-blue-primary {
+    width: auto;
+    min-width: 200px;
+    height: 44px;
+    font-size: 15px;
+  }
+  .scene-picker-row { gap: 16px; }
+  .scene-picker-label { font-size: 15px; margin-bottom: 6px; }
+  .scene-select-wrapper select { font-size: 16px; padding: 8px 12px; }
+  .scene-banner-img, .scene-banner-svg { height: 112px; }
+  .scene-meta-text { font-size: 12px; margin-top: 6px; }
+  .scene-transport-row { margin-top: 8px; margin-bottom: 8px; gap: 12px; }
+  .scene-play-btn { height: 38px; font-size: 14px; padding: 6px 14px; }
+  .scene-tracks-list { gap: 4px; }
+  .scene-track-row { min-height: 38px; grid-template-columns: 156px 1fr; gap: 12px; }
+  .scene-track-name, .scene-track-info { font-size: 14px; }
+  .scene-track-info svg { width: 20px; height: 20px; }
+  .scene-time-ruler { margin-left: 168px; width: calc(100% - 168px); margin-bottom: 2px; }
+  .scene-setup-step-view { --workspace-waveform-height: 32px; }
+  .scene-setup-step-view .step-sidebar-card { padding: 12px 16px; }
+  .scene-setup-step-view .sidebar-text { line-height: 1.35; }
+  .scene-setup-step-view .sidebar-title { margin-bottom: 4px; }
+  .scene-setup-step-view .card-divider, .review-change-main-card .card-divider { margin: 8px 0; }
+  .sound-issues-left-col > .step-main-card + .step-main-card { margin-top: 12px; }
+  .mic-status-table { font-size: 13px; line-height: 1.4; }
+  .mic-status-table th, .mic-status-table td { padding: 6px 12px; }
+  .affected-range-indicator-wrap { height: 20px; }
+  .view-readings-link { margin-top: 8px; }
+  .review-card-top-row { margin-bottom: 8px; }
+  .review-performer-name { font-size: 16px; }
+  .proposed-change-label { font-size: 12px; }
+  .proposed-change-headline { font-size: 21px; }
+  .proposed-change-row { gap: 16px; }
+  .diagram-box { width: 140px; min-width: 140px; height: 64px; }
+  .diagram-box-val { font-size: 20px; }
+  .diagram-box-header svg { width: 22px; height: 22px; }
+  .channels-rule-row { gap: 8px 16px; }
+  .channels-rule-label { width: 180px; min-width: 180px; font-size: 15px; padding-top: 10px; }
+  .channels-rule-input { width: 320px; height: 40px; font-size: 14px; }
+  .channels-input-action-group { gap: 10px; }
+  .channels-rule-helper { width: 100%; margin-top: 0; }
+  .reason-row { grid-template-columns: 180px 1fr; gap: 8px 16px; }
+  .reason-label, .reason-text { font-size: 14px; }
+  .rule-interpretation-notice { margin-top: 0; padding: 8px 12px; display: flex; align-items: center; gap: 12px; }
+  .rule-interpretation-notice .btn-confirm-rule { margin-top: 0; flex-shrink: 0; }
+  .compare-mic-selector-section { margin-bottom: 8px; }
+  .compare-mic-pill { height: 34px; min-height: 34px; font-size: 13px; padding: 0 12px; }
+  .compare-takes-step-view { --workspace-waveform-height: 28px; }
+  .waveform-ruler { height: 16px; margin-bottom: 2px; }
+  .compare-track-block { gap: 2px; padding: 4px; }
+  .compare-track-header { line-height: 1.25; }
+  .compare-track-label { font-size: 16px; }
+  .compare-track-meta { font-size: 12px; }
+  .compare-track-transport-row { grid-template-columns: 144px minmax(0, 1fr); gap: 12px; margin-top: 0; }
+  .compare-matrix-table { line-height: 1.35; }
+  .compare-matrix-table th, .compare-matrix-table td { padding: 5px 10px; font-size: 13px; }
+  .compare-main-panel .card-divider { margin: 6px 0; }
+  .active-audio-status-banner { padding: 6px 10px; margin-bottom: 6px; }
+  .visible-caption-box { margin-top: 6px; padding: 6px 8px; }
+  .report-scene-header-row { margin-bottom: 4px; }
+  .report-scene-header-row > div { display: flex; align-items: baseline; gap: 10px; }
+  .report-scene-title { font-size: 19px; }
+  .report-scene-meta { font-size: 12px; }
+  .report-checks-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
+  .report-check-row { padding: 10px 0; gap: 10px; border-bottom: 1px solid #dedbd5; }
+  .report-check-divider { display: none; }
+  .check-title { font-size: 14px; line-height: 1.3; }
+  .check-desc { font-size: 12px; line-height: 1.35; }
+  .report-check-row .btn-view-details-link { font-size: 12px; white-space: nowrap; }
+  .report-failure-reasons-box { margin: 8px 0; padding: 8px 12px; }
+  .report-left-card .card-divider { margin: 8px 0; }
+  .report-grafana-section { margin-top: 8px; }
+  .grafana-section-header { margin-bottom: 8px; }
+  .mini-plot-card { padding: 8px 12px; }
+  .report-left-card { --workspace-waveform-height: 28px; }
+}
+
 @media print {
   .rehearsal-header,
   .rehearsal-stepper-nav,

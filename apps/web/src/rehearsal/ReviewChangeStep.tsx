@@ -446,9 +446,6 @@ export const ReviewChangeStep: React.FC<ReviewChangeStepProps> = ({
             <span>{busy ? 'Please wait…' : 'Test this change'}</span>
             <ArrowRightIcon size={18} />
           </button>
-          <span className="bottom-card-disclaimer">
-            Clicking approves this change and runs another sample check.
-          </span>
         </div>
       </footer>
     </div>
